@@ -8,7 +8,7 @@ private:
 	string name_;
 	int age_;
 public:
-	Person(const string& name, int age);
+	Person(const string name, int age);
 	~Person() { cout << "¼Ò¸êÀÚ È£Ãâ" << endl; }
 	void ShowPersonInfo();
 };
@@ -19,7 +19,7 @@ int main()
 
 	return 0;
 }
-Person::Person(const string& name, int age)
+Person::Person(const string name, int age)
 {
 	name_ = name;
 	age_ = age;
