@@ -19,10 +19,34 @@ citations	return
 ※ 공지 - 2019년 2월 28일 테스트 케이스가 추가되었습니다.*/
 #include <string>
 #include <vector>
+#include <map>
+#include <iostream>
 
 using namespace std;
 
 int solution(vector<int> citations) {
     int answer = 0;
+    map <int, int, greater<int>> sorted_ciat;
+    int val = 0;
+
+    for (int i = 0; i < citations.size(); i++)
+    {
+        sorted_ciat[citations[i]] += 1;
+    }
+
+    for (int i = sorted_ciat.begin()->first; i >= 0; i--)
+    {
+        int h = i;
+        if (sorted_ciat[i] == NULL)
+            val += 0;
+        else 
+            val += sorted_ciat[i];
+        if (h <= val && h >= (citations.size() - val))
+            return h;
+    }
     return answer;
+}
+int main()
+{
+    cout<<solution({ 3,0,6,1,5 });
 }

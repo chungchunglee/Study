@@ -23,3 +23,64 @@
 출력
 첫째 줄에 후위 표기식으로 바뀐 식을 출력하시오
 */
+
+#include <iostream>
+#include <stack>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+
+    string s;
+    stack<char> checker;
+    cin >> s;
+
+    for (int i = 0; i < s.length(); i++)
+    {
+        if (s[i] >= 'A' && s[i] <= 'Z')
+        {
+            cout << s[i];
+        }
+        else
+        {
+            if (s[i] == '(')
+                checker.push(s[i]);
+            else if (s[i] == '*' || s[i] == '/')
+            {
+                while (!checker.empty() && (checker.top() == '*' || checker.top() == '/'))
+                {
+                    cout << checker.top();
+                    checker.pop();
+                }
+                checker.push(s[i]);
+            }
+            else if (s[i] == '+' || s[i] == '-')
+            {
+                while (!checker.empty() && checker.top() != '(')
+                {
+                    cout << checker.top();
+                    checker.pop();
+                }
+                checker.push(s[i]);
+            }
+            else if (s[i] == ')')
+            {
+                while (!checker.empty() && checker.top() != '(')
+                {
+                    cout << checker.top();
+                    checker.pop();
+                }
+                checker.pop();
+            }
+        }
+    }
+    while (!checker.empty())
+    {
+        cout << checker.top();
+        checker.pop();
+    }
+
+    return 0;
+}
