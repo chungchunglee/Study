@@ -32,8 +32,30 @@ answers	return
 */
 #include <string>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
+
+vector<int> one = { 1,2,3,4,5 };
+vector<int> two = { 2,1,2,3,2,4,2,5 };
+vector<int> three = { 3,3,1,1,2,2,4,4,5,5 };
+
+vector<int> solution(vector<int> answers) {
+    vector<int> answer;
+    vector<int> grade(3);
+
+    for (int i = 0; i < answers.size(); i++)
+    {
+        if (answers[i] == one[i % one.size()]) grade[0]++;
+        if (answers[i] == two[i % two.size()]) grade[1]++;
+        if (answers[i] == three[i % three.size()]) grade[2]++;
+    }
+        int max_g = *max_element(grade.begin(), grade.end());
+
+        for (int i = 0 ; i < grade.size() ; i++)
+            if (grade[i] == max_g) answer.push_back(i + 1);
+        return answer;
+}
 
 vector<int> solution(vector<int> answers) {
     vector<int> answer;
@@ -47,15 +69,54 @@ vector<int> solution(vector<int> answers) {
         if (answers[i] == b[i % 8]) bcnt++;
         if (answers[i] == c[i % 10]) ccnt++;
     }
-    if (acnt > bcnt && acnt > ccnt) answer.push_back(1);
-    else if (bcnt > acnt && bcnt > ccnt) answer.push_back(2);
-    else if (ccnt > acnt && ccnt > bcnt) answer.push_back(3);
-    else if (bcnt == acnt && bcnt > ccnt) { answer.push_back(1); answer.push_back(2); }
-    else if (bcnt == ccnt && bcnt > acnt) { answer.push_back(2); answer.push_back(3); }
-    else if (ccnt == acnt && ccnt > bcnt) { answer.push_back(1); answer.push_back(3); }
-    else if (bcnt == acnt && bcnt == ccnt) { answer.push_back(1); answer.push_back(2); answer.push_back(3); }
+    priority_queue<pair<int, int>,vector<pair<int,int>>,less<pair<int,int>>> answer_pq;
+    answer_pq.push(make_pair(acnt, -1));
+    answer_pq.push(make_pair(bcnt, -2));
+    answer_pq.push(make_pair(ccnt, -3));
+    
+    int temp = answer_pq.top().first;
+    answer.push_back(answer_pq.top().second * (-1));       
+    answer_pq.pop();
 
-
-
+    while (temp == answer_pq.top().first)
+    {
+        temp = answer_pq.top().first;
+        answer.push_back(answer_pq.top().second*(-1));
+        answer_pq.pop();
+        if (answer_pq.empty())
+            break;
+    }
     return answer;
 }
+int main()
+{
+    solution({ 1,3,2,4,2 });
+    return 0;
+}
+
+#ifdef __ANSWER__
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+vector<int> one = { 1,2,3,4,5 };
+vector<int> two = { 2,1,2,3,2,4,2,5 };
+vector<int> thr = { 3,3,1,1,2,2,4,4,5,5 };
+
+vector<int> solution(vector<int> answers) {
+    vector<int> answer;
+    vector<int> they(3);
+    for (int i = 0; i < answers.size(); i++) {
+        if (answers[i] == one[i % one.size()]) they[0]++;
+        if (answers[i] == two[i % two.size()]) they[1]++;
+        if (answers[i] == thr[i % thr.size()]) they[2]++;
+    }
+    int they_max = *max_element(they.begin(), they.end());
+    for (int i = 0; i < 3; i++) {
+        if (they[i] == they_max) answer.push_back(i + 1);
+    }
+    return answer;
+}
+#endif

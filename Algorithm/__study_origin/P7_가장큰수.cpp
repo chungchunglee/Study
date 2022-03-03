@@ -19,12 +19,72 @@ numbers	return
 */
 #include <string>
 #include <vector>
-#include <map>
-#include <queue>
+#include <algorithm>
 #include <iostream>
 
 using namespace std;
 
+bool comp_str(string a, string b)
+{
+    return (a + b) > (b + a);
+}
+
+
+string solution(vector<int> numbers) {
+    string answer = "", fail = "";
+    vector<string> numbers_str(numbers.size());
+
+    for (int i = 0; i < numbers.size(); i++) 
+        numbers_str[i] = to_string(numbers[i]);
+
+    sort(numbers_str.begin(), numbers_str.end(), comp_str);
+    for (auto k : numbers_str)
+    {
+        answer += k;
+        fail += '0';
+    }
+    if (answer == fail)
+        answer = '0';
+
+    return answer;
+}
+int main()
+{
+    cout << solution({0,0,0,0,0}) << endl;
+}
+//fail 1
+/*
+string solution(vector<int> numbers) {
+    string answer = "";
+    map <float, int,greater<float>> checker;
+    for (int i = 0 ; i < numbers.size(); i++)
+    {
+        int n = 0;
+        float m = numbers[i];
+        while (1)
+        {
+            if (m  < 10.0f)
+                break;
+            m = m / 10;
+            n++;
+        }
+        checker[m] = n;
+    }
+    for (auto& k : checker)
+    {
+        int n = k.second;
+        int m = k.first;
+        while (n--)
+            m *= 10;
+        answer += to_string(int(m));
+    }
+
+    return answer;
+}
+*/
+
+//fail 2
+/*
 string solution(vector<int> numbers) {
     string answer = "";
     priority_queue <pair<float, int>> checker;
@@ -48,39 +108,6 @@ string solution(vector<int> numbers) {
         checker.pop();
 
         while (n++)
-            m *= 10;
-        answer += to_string(int(m));
-    }
-
-    return answer;
-}
-int main()
-{
-    //cout << solution({6,10,2}) << endl;
-    cout << solution({3,30,34,5,9}) << endl;
-}
-/*
-string solution(vector<int> numbers) {
-    string answer = "";
-    map <float, int,greater<float>> checker;
-    for (int i = 0 ; i < numbers.size(); i++)
-    {
-        int n = 0;
-        float m = numbers[i];
-        while (1)
-        {
-            if (m  < 10.0f)
-                break;
-            m = m / 10;
-            n++;
-        }
-        checker[m] = n;
-    }
-    for (auto& k : checker)
-    {
-        int n = k.second;
-        int m = k.first;
-        while (n--)
             m *= 10;
         answer += to_string(int(m));
     }

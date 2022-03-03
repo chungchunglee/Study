@@ -27,7 +27,34 @@ numbers	return
 
 using namespace std;
 
+vector<int> check_pNum(vector<int> input)
+{
+    vector<int> answer;
+    for(int j = 0; j < input.size(); j++)
+    {
+        bool bP = true;
+        for (int i = 2; i < input[0] / 2; i++)
+        {
+            if (input[i] % i != 0)
+            {
+                bP = false;
+                break;
+            }
+        }
+        if (bP) answer.push_back(input[i]);
+    }
+}
+
+
 int solution(string numbers) {
     int answer = 0;
+    vector<int> numbers_i(numbers.size());
+
+    for (int i = 0; i < numbers.size(); i++)
+        numbers_i[i] = numbers[i] - '0';
+
+    vector<int> numbers_c;
+    //순열을 이용한 
+
     return answer;
 }
