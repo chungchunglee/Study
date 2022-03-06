@@ -24,6 +24,10 @@ numbers	return
 */
 #include <string>
 #include <vector>
+#include <algorithm>
+#include <cmath>
+#include <unordered_set>
+#include <iostream>
 
 using namespace std;
 
@@ -33,28 +37,51 @@ vector<int> check_pNum(vector<int> input)
     for(int j = 0; j < input.size(); j++)
     {
         bool bP = true;
-        for (int i = 2; i < input[0] / 2; i++)
+        if (input[j] <= 1)
+            continue;
+        
+        for (int i = 2; i <= sqrt(input[j]); i++)
         {
-            if (input[i] % i != 0)
+            if (input[j] % i == 0)
             {
                 bP = false;
                 break;
             }
         }
-        if (bP) answer.push_back(input[i]);
+        if (bP) answer.push_back(input[j]);
     }
+    return answer;
+}
+vector<int> create_numbers(string numbers)
+{
+    unordered_set<int> nums;
+
+    sort(numbers.begin(), numbers.end());
+    do
+    {
+        for (int i = 1; i < numbers.size() + 1; i++)
+        {
+            nums.insert(stoi(numbers.substr(0, i)));
+        }
+    } while (next_permutation(numbers.begin(), numbers.end()));
+
+    vector<int> answer(nums.begin(), nums.end());
+    return answer;
 }
 
 
 int solution(string numbers) {
     int answer = 0;
-    vector<int> numbers_i(numbers.size());
+    
+    vector<int> reroc_nums = create_numbers(numbers);
+    vector<int> p_nums = check_pNum(reroc_nums);
 
-    for (int i = 0; i < numbers.size(); i++)
-        numbers_i[i] = numbers[i] - '0';
+    return p_nums.size();
+}
 
-    vector<int> numbers_c;
-    //순열을 이용한 
+int main()
+{
+    cout << solution("1230");
 
-    return answer;
+    return 0;
 }

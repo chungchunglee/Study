@@ -12,24 +12,21 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <iterator>
+#include <algorithm>
 using namespace std;
 
 int main()
 {
-	string insert;
-	vector<int>  alphabet = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-	cin >> insert;
+	string str;
+	vector<int>  alphabet(26);
+	cin >> str;
 
-	for (int i = 0; i < insert.size(); i++)
-	{
-		int cnt = (int)insert[i] - 97;
-		alphabet[cnt]++;
-	}
+	for (int i = 0; i < str.size(); i++)
+		alphabet[str[i] - 'a']++;
 
+	ostream_iterator<int> out_iter(cout," ");
+	copy(alphabet.begin(), alphabet.end(), out_iter);
 
-	for (int i = 0; i < alphabet.size(); i++)
-	{
-		cout << alphabet[i] << " ";
-	}
-
+	return 0;
 }
