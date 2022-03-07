@@ -31,10 +31,52 @@ name	return
 */
 #include <string>
 #include <vector>
+#include <algorithm>
+
+using namespace std;
+
+
+
+int solution(string name) {
+    int answer = 0;
+    vector<int> btn_cnt(name.size());
+
+    for (int i = 0; i < (int)name.size(); i++)
+    {
+        btn_cnt[i] = name[i] - 'A';
+        //역으로 버튼 체크
+        if (27 - btn_cnt[i] < btn_cnt[i])
+            btn_cnt[i] = 27 - btn_cnt[i];
+
+        answer += btn_cnt[i];
+    }
+
+
+    return answer;
+}
+
+#ifdef __OTHERS__
+#include <string>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
 int solution(string name) {
     int answer = 0;
+    for (auto ch : name) answer += min(ch - 'A', 91 - ch);
+
+    int len = name.length();
+    int move = len - 1;
+    int next;
+    for (int i = 0; i < len; i++) {
+        next = i + 1;
+        while (next < len && name[next] == 'A') next++;
+        move = min(move, i + (len - next) + min(i, len - next));
+    }
+    answer += move;
+
     return answer;
 }
+
+#endif // __OTHERS__
