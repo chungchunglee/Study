@@ -14,3 +14,34 @@ ROT13은 알파벳 대문자와 소문자에만 적용할 수 있다. 알파벳이 아닌 글자는 원래 글�
 출력
 첫째 줄에 S를 ROT13으로 암호화한 내용을 출력한다.
 */
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+	string S;
+	getline(cin, S);
+
+	for (int i = 0; i < (int)S.size(); i++)
+	{
+		if (S[i] >= 'A' && S[i] <= 'Z') //97~122
+		{
+			if (S[i] + 13 > 'Z')
+				S[i] -= 13;
+			else
+				S[i] += 13;
+		}
+		else if (S[i] >= 'a' && S[i] <= 'z') //65~90
+		{
+			if (S[i] + 13 > 'z')
+				S[i] -= 13;
+			else
+				S[i] += 13;
+		}
+	}
+	cout << S;
+
+	return 0;
+}
