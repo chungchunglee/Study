@@ -28,6 +28,10 @@ using namespace std;
 
 string solution(string number, int k) {
     string answer = "";
+<<<<<<< HEAD
+=======
+    //int ;
+>>>>>>> 345aaa8059c957527a89ce71b5f54d144a4ee037
     for (int j = 0, index = -1; j < number.size() - k; j++)
     {
         char max = 0;
