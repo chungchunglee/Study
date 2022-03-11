@@ -39,20 +39,36 @@ using namespace std;
 
 int solution(string name) {
     int answer = 0;
-    vector<int> btn_cnt(name.size());
+    vector<int> non_A_index;
+    int len = name.size();
 
-    for (int i = 0; i < (int)name.size(); i++)
+    for (int i = 0; i < len; i++)
     {
-        btn_cnt[i] = name[i] - 'A';
-        //역으로 버튼 체크
-        if (27 - btn_cnt[i] < btn_cnt[i])
-            btn_cnt[i] = 27 - btn_cnt[i];
-
-        answer += btn_cnt[i];
+        answer += (int)(name[i] - 'A' < 'Z' - name[i] + 1) ? name[i] - 'A' : 'Z' - name[i] + 1;
+        if (name[i] != 'A')
+            non_A_index.push_back(i);
     }
+    //예외 처리 1 - 바꿀필요없을 경우
+    if (!non_A_index.size())
+        return answer;
+    int next = 1;
+    //초깃값 설정 - min값
+    int min_val = min(non_A_index.back(),len - non_A_index.front());
 
-
+    for (int i = 0; i < non_A_index.size() - 1; i++)
+    {
+        min_val = min(min_val, non_A_index[i] + len - non_A_index[i + 1] + min(non_A_index[i], len - non_A_index[i + 1]));
+    }
+    answer += min_val;
     return answer;
+}
+int main()
+{
+    int a_b = solution("AABAAAAAAAB");
+    a_b = solution("AAAAAAAA");
+    a_b = solution("ABBBBAAAAABAAA");
+    a_b = solution("ABBBBAAAAABAAA");
+    return 0;
 }
 
 #ifdef __OTHERS__
@@ -69,7 +85,8 @@ int solution(string name) {
     int len = name.length();
     int move = len - 1;
     int next;
-    for (int i = 0; i < len; i++) {
+    for (int i = 0; i < len; i++) 
+    {
         next = i + 1;
         while (next < len && name[next] == 'A') next++;
         move = min(move, i + (len - next) + min(i, len - next));
