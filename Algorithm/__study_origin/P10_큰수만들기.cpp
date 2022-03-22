@@ -28,10 +28,7 @@ using namespace std;
 
 string solution(string number, int k) {
     string answer = "";
-<<<<<<< HEAD
-=======
-    //int ;
->>>>>>> 345aaa8059c957527a89ce71b5f54d144a4ee037
+
     for (int j = 0, index = -1; j < number.size() - k; j++)
     {
         char max = 0;
@@ -49,7 +46,7 @@ string solution(string number, int k) {
 }
 int main()
 {
-    string s1 = solution("1222",2);
+    string s1 = solution("1222",4);
     s1 = solution("1231234",3);
     s1 = solution("4177252841",4);
     s1 = solution("4177252841",4);

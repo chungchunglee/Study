@@ -40,3 +40,73 @@ void _transform()
 	cout << "-- 변경후 --" << endl;
 	copy(v.begin(), v.end(), out_iter);
 }
+
+void _replace()
+{
+	int arr[10] = { 3,5,7,3,10,8,9,7,4,3 };
+	vector<int> v(10);
+
+	copy(arr, arr + 10, v.begin());
+
+	ostream_iterator<int> out_iter(cout, " : ");
+	cout << endl << "변경전" << endl;
+	copy(v.begin(), v.end(), out_iter);
+	cout << endl;
+	
+	replace(v.begin(), v.end(), 3, 10);
+	cout << endl << "변경후" << endl;
+	copy(v.begin(), v.end(), out_iter);
+}
+
+void _fill()
+{
+	vector<int> v1 = { 1,2,3 };
+	vector<int>v2(8);
+
+	copy(v1.begin(), v1.end(), v2.begin());
+	ostream_iterator<int> out_iter(cout, " : ");
+	cout << "변경전" << endl;
+	copy(v2.begin(), v2.end(), out_iter);
+	cout << endl;
+
+	fill(v2.begin(), v2.end(), 5);
+	cout << "변경후" << endl;
+	copy(v2.begin(), v2.end(), out_iter);
+	cout << endl;
+}
+
+void _reverse()
+{
+	vector<int> v = { 1,2,3,4,5 };
+	ostream_iterator<int> out_iter(cout, " : ");
+
+	cout << "변경전" << endl;
+	copy(v.begin(), v.end(), out_iter);
+	cout << endl;
+
+	reverse(v.begin(), v.end());
+	cout << "변경후1" << endl;
+	copy(v.begin(), v.end(), out_iter);
+	cout << endl;
+
+	reverse(v.begin(), v.end()-2);
+	cout << "변경후2" << endl;
+	copy(v.begin(), v.end(), out_iter);
+	cout << endl;
+}
+
+void _random_shuffle()
+{
+	vector<int> v(8);
+	for (int i = 0; i < (int)v.size(); i++)
+		v[i] = i + 1;
+
+	cout << "변경전" << endl;
+	copy(v.begin(), v.end(), ostream_iterator<int>(cout, " "));
+	cout << endl;
+
+	random_shuffle(v.begin(), v.end());
+	cout << "변경후" << endl;
+	copy(v.begin(), v.end(), ostream_iterator<int>(cout, " "));
+	cout << endl;
+}

@@ -11,7 +11,10 @@ int main()
 	//_equal();
 	//_search();
 	//_copy();
-	_transform();
-
+	//_transform();
+	//_replace();
+	//_fill();
+	//_reverse();
+	_random_shuffle();
 	return 0;
 }

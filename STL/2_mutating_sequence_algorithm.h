@@ -25,3 +25,11 @@ using namespace std;
 void _copy();
 //transform(A,B,C,Function); A~B 요소를 Function을 적용하고 C부터 값 붙여넣기
 void _transform();
+//replace(A,B,C,D); A~B 구간중 C값을 D로 변경
+void _replace();
+//fill(A,B,C); A~B 구간을 C로 할당
+void _fill();
+//reverse(A,B); 주어진 구간을 역순으로 재배치
+void _reverse();
+//random_shuffle(A,B); 주어진 구간의 요소를 무작위로 재배치
+void _random_shuffle();
