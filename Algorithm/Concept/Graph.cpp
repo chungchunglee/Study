@@ -7,7 +7,7 @@ int main()
 {
 	int n, m;
 	cin >> n >> m; // 정점과 간선의 개수 입력
-	/
+	
 	int** graph = new int* [n];
 	for (int i = 0; i <= n; i++)
 		graph[i] = new int[m];
